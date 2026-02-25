@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // widget de texto
+// ignore: camel_case_types
 class texto extends StatelessWidget {
   final String text;
   final Color color;
@@ -22,6 +23,7 @@ class texto extends StatelessWidget {
 }
 
 // widget de botón
+// ignore: camel_case_types
 class boton extends StatelessWidget {
   final String texto;
   final double ancho;
@@ -58,6 +60,7 @@ class boton extends StatelessWidget {
 }
 
 // widget de formulario
+// ignore: camel_case_types
 class formulario_campo_texto extends StatelessWidget {
   final String etiqueta;
   final String sugerencia;
@@ -86,5 +89,19 @@ class formulario_campo_texto extends StatelessWidget {
         border: const OutlineInputBorder(),
       ),
     );
+  }
+}
+
+// notificador para el botón
+// ignore: camel_case_types
+class botonNotificador extends ValueNotifier<int> {
+  botonNotificador(super.valorInicial);
+
+  void incrementar() {
+    value++;
+  }
+
+  void resetear() {
+    value = 0;
   }
 }
