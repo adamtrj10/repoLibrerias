@@ -57,5 +57,34 @@ class boton extends StatelessWidget {
   }
 }
 
-
 // widget de formulario
+class formulario_campo_texto extends StatelessWidget {
+  final String etiqueta;
+  final String sugerencia;
+  final TextEditingController controlador;
+  final bool esContrasenya;
+  final TextInputType tipoTeclado;
+
+  const formulario_campo_texto({
+    super.key,
+    required this.etiqueta,
+    required this.sugerencia,
+    required this.controlador,
+    this.esContrasenya = false,
+    this.tipoTeclado = TextInputType.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controlador,
+      obscureText: esContrasenya,
+      keyboardType: tipoTeclado,
+      decoration: InputDecoration(
+        labelText: etiqueta,
+        hintText: sugerencia,
+        border: const OutlineInputBorder(),
+      ),
+    );
+  }
+}
