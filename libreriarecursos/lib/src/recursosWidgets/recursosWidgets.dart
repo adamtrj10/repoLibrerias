@@ -88,3 +88,17 @@ class formulario_campo_texto extends StatelessWidget {
     );
   }
 }
+
+// notificador para el botón
+// ignore: camel_case_types
+class botonNotificador extends ValueNotifier<int> {
+  botonNotificador(super.valorInicial);
+
+  void incrementar() {
+    value++;
+  }
+
+  void resetear() {
+    value = 0;
+  }
+}
