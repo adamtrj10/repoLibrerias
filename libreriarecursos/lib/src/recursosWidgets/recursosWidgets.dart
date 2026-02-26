@@ -60,15 +60,15 @@ class boton extends StatelessWidget {
 // widget de formulario
 class formulario_campo_texto extends StatelessWidget {
   final String etiqueta;
-  final String sugerencia;
+  String? sugerencia;
   final TextEditingController controlador;
   final bool esContrasenya;
   final TextInputType tipoTeclado;
 
-  const formulario_campo_texto({
+  formulario_campo_texto({
     super.key,
     required this.etiqueta,
-    required this.sugerencia,
+    this.sugerencia,
     required this.controlador,
     this.esContrasenya = false,
     this.tipoTeclado = TextInputType.text,
