@@ -62,6 +62,7 @@ class formulario_campo_texto extends StatelessWidget {
   final String etiqueta;
   String? sugerencia;
   final TextEditingController controlador;
+  String? Function(String?)? validador;
   final bool esContrasenya;
   final TextInputType tipoTeclado;
 
@@ -69,6 +70,7 @@ class formulario_campo_texto extends StatelessWidget {
     super.key,
     required this.etiqueta,
     this.sugerencia,
+    this.validador,
     required this.controlador,
     this.esContrasenya = false,
     this.tipoTeclado = TextInputType.text,
