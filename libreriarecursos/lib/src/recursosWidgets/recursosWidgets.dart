@@ -78,9 +78,10 @@ class formulario_campo_texto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controlador,
       obscureText: esContrasenya,
+      validator: validador,
       keyboardType: tipoTeclado,
       decoration: InputDecoration(
         labelText: etiqueta,
