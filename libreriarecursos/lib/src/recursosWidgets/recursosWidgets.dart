@@ -1,84 +1,84 @@
 import 'package:flutter/material.dart';
 
-// widget de texto
-class texto extends StatelessWidget {
-  final String text;
-  final Color color;
-  final double tamanyo;
+class recursosWidgets {
+// widget de botón con icono
+  Widget botonIcono({
+    required IconData icono,
+    required double ancho,
+    required double alto,
+    required Color colorIcono,
+    required Color colorfondo,
+    required VoidCallback accion,
+  }) {
+    return botonBase(
+      ancho: ancho,
+      alto: alto,
+      colorfondo: colorfondo,
+      accion: accion,
+      contenido: Icon(icono, color: colorIcono),
+    );
+  }
 
-  const texto(
-      {super.key,
-      required this.text,
-      required this.color,
-      required this.tamanyo});
+// widget de botón con texto
+  Widget botonTexto({
+    required String texto,
+    required double ancho,
+    required double alto,
+    required Color colortexto,
+    required Color colorfondo,
+    required VoidCallback accion,
+  }) {
+    return botonBase(
+      ancho: ancho,
+      alto: alto,
+      colorfondo: colorfondo,
+      accion: accion,
+      contenido: Text(texto,
+          style: TextStyle(color: colortexto, fontWeight: FontWeight.bold)),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
+// widget de botón base
+  Widget botonBase({
+    required Widget contenido,
+    required double ancho,
+    required double alto,
+    required Color colorfondo,
+    required VoidCallback accion,
+  }) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: colorfondo,
+        minimumSize: Size(ancho, alto),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      onPressed: accion,
+      child: contenido,
+    );
+  }
+
+  static Widget texto({
+    required String text,
+    required Color color,
+    required double tamanyo,
+    TextAlign alineacion = TextAlign.start,
+    FontWeight grosor = FontWeight.normal,
+  }) {
     return Text(
       text,
-      style: TextStyle(color: color, fontSize: tamanyo),
+      textAlign: alineacion,
+      style: TextStyle(color: color, fontSize: tamanyo, fontWeight: grosor),
     );
   }
-}
 
-// widget de botón
-class boton extends StatelessWidget {
-  final String texto;
-  final double ancho;
-  final double alto;
-  final Color colortexto;
-  final Color colorfondo;
-  final VoidCallback accion;
-
-  const boton({
-    super.key,
-    required this.texto,
-    required this.ancho,
-    required this.alto,
-    required this.colortexto,
-    required this.colorfondo,
-    required this.accion,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: ancho,
-      height: alto,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: colorfondo,
-          foregroundColor: colortexto,
-        ),
-        onPressed: accion,
-        child: Text(texto),
-      ),
-    );
-  }
-}
-
-// widget de formulario
-// ignore: must_be_immutable, camel_case_types
-class formulario_campo_texto extends StatelessWidget {
-  final String etiqueta;
-  String? sugerencia;
-  final TextEditingController controlador;
-  String? Function(String?)? validador;
-  final bool esContrasenya;
-  final TextInputType tipoTeclado;
-
-  formulario_campo_texto({
-    super.key,
-    required this.etiqueta,
-    this.sugerencia,
-    this.validador,
-    required this.controlador,
-    this.esContrasenya = false,
-    this.tipoTeclado = TextInputType.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  static Widget campoTexto({
+    required String etiqueta,
+    required TextEditingController controlador,
+    String? sugerencia,
+    String? Function(String?)? validador,
+    bool esContrasenya = false,
+    TextInputType tipoTeclado = TextInputType.text,
+  }) {
     return TextFormField(
       controller: controlador,
       obscureText: esContrasenya,
@@ -88,6 +88,8 @@ class formulario_campo_texto extends StatelessWidget {
         labelText: etiqueta,
         hintText: sugerencia,
         border: const OutlineInputBorder(),
+        // Añadimos un icono de candado si es contraseña por estética
+        prefixIcon: esContrasenya ? const Icon(Icons.lock_outline) : null,
       ),
     );
   }
