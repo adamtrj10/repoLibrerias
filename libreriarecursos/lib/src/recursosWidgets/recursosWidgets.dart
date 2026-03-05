@@ -58,6 +58,7 @@ class boton extends StatelessWidget {
 }
 
 // widget de formulario
+// ignore: must_be_immutable, camel_case_types
 class formulario_campo_texto extends StatelessWidget {
   final String etiqueta;
   String? sugerencia;
