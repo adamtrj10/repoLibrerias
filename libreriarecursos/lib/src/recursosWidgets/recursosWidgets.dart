@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class recursosWidgets {
 // widget de botón con icono
-  Widget botonIcono({
+  static Widget botonIcono({
     required IconData icono,
     required double ancho,
     required double alto,
@@ -20,7 +20,7 @@ class recursosWidgets {
   }
 
 // widget de botón con texto
-  Widget botonTexto({
+  static Widget botonTexto({
     required String texto,
     required double ancho,
     required double alto,
@@ -39,7 +39,7 @@ class recursosWidgets {
   }
 
 // widget de botón base
-  Widget botonBase({
+  static Widget botonBase({
     required Widget contenido,
     required double ancho,
     required double alto,
@@ -88,7 +88,6 @@ class recursosWidgets {
         labelText: etiqueta,
         hintText: sugerencia,
         border: const OutlineInputBorder(),
-        // Añadimos un icono de candado si es contraseña por estética
         prefixIcon: esContrasenya ? const Icon(Icons.lock_outline) : null,
       ),
     );
