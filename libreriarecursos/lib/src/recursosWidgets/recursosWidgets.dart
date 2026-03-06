@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class recursosWidgets {
 // widget de botón con icono
   static Widget botonIcono({
@@ -57,6 +58,7 @@ class recursosWidgets {
     );
   }
 
+// widget básico de texto
   static Widget texto({
     required String text,
     required Color color,
@@ -71,6 +73,7 @@ class recursosWidgets {
     );
   }
 
+// widget básico de un campo de texto (para formularios)
   static Widget campoTexto({
     required String etiqueta,
     required TextEditingController controlador,
