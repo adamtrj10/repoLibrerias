@@ -124,12 +124,22 @@ class recursosWidgets {
   static Widget escanerQR({
     required void Function(String) alDetectar,
   }) {
+    bool detectado = false;
+
     return MobileScanner(
+      controller: MobileScannerController(
+        detectionSpeed: DetectionSpeed.normal,
+      ),
       onDetect: (capture) {
+        if (detectado) return;
+
         final List<Barcode> barcodes = capture.barcodes;
         for (final barcode in barcodes) {
-          if (barcode.rawValue != null) {
-            alDetectar(barcode.rawValue!);
+          final String? valor = barcode.rawValue;
+          if (valor != null) {
+            detectado = true;
+            alDetectar(valor);
+            break;
           }
         }
       },
@@ -138,9 +148,18 @@ class recursosWidgets {
 
   // widget para utilizar el webview
   static Widget visorWeb({required String url}) {
+    final String urlLimpia = url.trim();
+
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(url));
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onWebResourceError: (error) {
+            print("Error cargando la web: ${error.description}");
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(urlLimpia));
 
     return WebViewWidget(controller: controller);
   }
