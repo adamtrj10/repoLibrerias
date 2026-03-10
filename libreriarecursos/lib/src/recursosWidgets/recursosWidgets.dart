@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:libreriarecursos/libreriarecursos.dart';
 
 // ignore: camel_case_types
 class recursosWidgets {
@@ -74,12 +75,13 @@ class recursosWidgets {
   }
 
 // widget básico de un campo de texto (para formularios)
-  static Widget campoTexto({
+  static Widget campoTexto<T>({
     required String etiqueta,
     required TextEditingController controlador,
     String? sugerencia,
     String? Function(String?)? validador,
     bool esContrasenya = false,
+    void Function(T)? alCambiar,
     TextInputType tipoTeclado = TextInputType.text,
   }) {
     return TextFormField(
@@ -87,6 +89,11 @@ class recursosWidgets {
       obscureText: esContrasenya,
       validator: validador,
       keyboardType: tipoTeclado,
+      onChanged: (valor) {
+        if (alCambiar != null) {
+          alCambiar(valor as T);
+        }
+      },
       decoration: InputDecoration(
         labelText: etiqueta,
         hintText: sugerencia,
@@ -99,8 +106,9 @@ class recursosWidgets {
 
 // notificador para el botón
 // ignore: camel_case_types
-class botonNotificador extends ValueNotifier<int> {
-  botonNotificador(super.valorInicial);
+class botonNotificador extends Notificador<int> {
+  // recibimos el número y lo lanzamos al padre (Notificador)
+  botonNotificador(int inicial) : super(inicial);
 
   void incrementar() {
     value++;
