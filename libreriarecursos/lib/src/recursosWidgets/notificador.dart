@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Notificador<T> extends ChangeNotifier {
-  // la clase guarda un valor, pero sin saber de qué tipo
+class Notificador<T> extends ChangeNotifier implements ValueListenable<T> {
   T _value;
   Notificador(this._value);
 
+  @override
   T get value => _value;
 
   set value(T nuevoValor) {

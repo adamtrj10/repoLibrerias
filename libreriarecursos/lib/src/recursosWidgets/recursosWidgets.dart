@@ -107,10 +107,12 @@ class recursosWidgets {
 // notificador para el botón
 // ignore: camel_case_types
 class botonNotificador extends Notificador<int> {
-  // recibimos el número y lo lanzamos al padre (Notificador)
+  // El "inicial" se lo pasamos al padre (Notificador),
+  // que ahora ya es un ValueNotifier gracias al cambio anterior.
   botonNotificador(int inicial) : super(inicial);
 
   void incrementar() {
+    // 'value' ya existe dentro de Notificador/ValueNotifier
     value++;
   }
 
