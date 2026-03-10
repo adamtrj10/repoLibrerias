@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:libreriarecursos/libreriarecursos.dart';
+import 'package:camera/camera.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: camel_case_types
 class recursosWidgets {
@@ -101,6 +104,45 @@ class recursosWidgets {
         prefixIcon: esContrasenya ? const Icon(Icons.lock_outline) : null,
       ),
     );
+  }
+
+  //widget que muestre la cámara
+  static Widget visorCamara({
+    required bool estaLista,
+    required CameraController? controlador,
+  }) {
+    if (!estaLista || controlador == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    return AspectRatio(
+      aspectRatio: controlador.value.aspectRatio,
+      child: CameraPreview(controlador),
+    );
+  }
+
+  // widget para utilizar el QR
+  static Widget escanerQR({
+    required void Function(String) alDetectar,
+  }) {
+    return MobileScanner(
+      onDetect: (capture) {
+        final List<Barcode> barcodes = capture.barcodes;
+        for (final barcode in barcodes) {
+          if (barcode.rawValue != null) {
+            alDetectar(barcode.rawValue!);
+          }
+        }
+      },
+    );
+  }
+
+  // widget para utilizar el webview
+  static Widget visorWeb({required String url}) {
+    final controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(url));
+
+    return WebViewWidget(controller: controller);
   }
 }
 
