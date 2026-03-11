@@ -121,28 +121,36 @@ class recursosWidgets {
   }
 
   // widget para utilizar el QR
-  static Widget escanerQR({
-    required void Function(String) alDetectar,
-  }) {
-    bool detectado = false;
+  static Widget escanerQR({required void Function(String) alDetectar}) {
+    bool detectado = false; // Este es el "cerrojo" interno
 
-    return MobileScanner(
-      controller: MobileScannerController(
-        detectionSpeed: DetectionSpeed.normal,
-      ),
-      onDetect: (capture) {
-        if (detectado) return;
+    return Column(
+      children: [
+        Expanded(
+          flex: 5,
+          child: MobileScanner(
+            controller: MobileScannerController(
+              detectionSpeed: DetectionSpeed.noDuplicates,
+            ),
+            onDetect: (capture) {
+              if (detectado) return; // Si ya disparó, ignora todo lo demás
 
-        final List<Barcode> barcodes = capture.barcodes;
-        for (final barcode in barcodes) {
-          final String? valor = barcode.rawValue;
-          if (valor != null) {
-            detectado = true;
-            alDetectar(valor);
-            break;
-          }
-        }
-      },
+              final List<Barcode> barcodes = capture.barcodes;
+              if (barcodes.isNotEmpty) {
+                final String? valor = barcodes.first.rawValue;
+                if (valor != null) {
+                  detectado = true; // Bloqueamos el widget interno
+                  alDetectar(valor);
+                }
+              }
+            },
+          ),
+        ),
+        const Expanded(
+          flex: 1,
+          child: Center(child: Text("Escanea un código QR")),
+        )
+      ],
     );
   }
 
