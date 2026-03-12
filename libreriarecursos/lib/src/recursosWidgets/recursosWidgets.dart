@@ -124,20 +124,20 @@ class recursosWidgets {
   static Widget escanerQR({
     required void Function(String) alDetectar,
   }) {
-    bool detectado = false; // El cerrojo vive aquí dentro
+    bool detectado = false; // el cerrojo vive aquí dentro
 
     return MobileScanner(
       controller: MobileScannerController(
         detectionSpeed: DetectionSpeed.noDuplicates,
       ),
       onDetect: (capture) {
-        if (detectado) return; // Si ya detectó, no hace nada más
+        if (detectado) return; // si ya lo detectó, no hace nada más
 
         final List<Barcode> barcodes = capture.barcodes;
         if (barcodes.isNotEmpty) {
           final String? valor = barcodes.first.rawValue;
           if (valor != null) {
-            detectado = true; // Se bloquea internamente
+            detectado = true; // se bloquea internamente
             alDetectar(valor);
           }
         }
@@ -146,7 +146,10 @@ class recursosWidgets {
   }
 
   // widget para utilizar el webview
-  static Widget visorWeb({required String url}) {
+  static Widget visorWeb(
+      {required String url,
+      void Function(int)? alProgresar,
+      void Function(int)? alTerminar}) {
     final String urlLimpia = url.trim();
 
     final controller = WebViewController()
