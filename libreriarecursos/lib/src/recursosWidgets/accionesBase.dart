@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
 
-abstract class accionesBase {
+// ignore: camel_case_types
+abstract class accionesBase with WidgetsBindingObserver {
   // llave única para gestionar y validar formularios de forma centralizada
   final GlobalKey<FormState> llaveForm = GlobalKey<FormState>();
 
-  // método que define cómo liberar memoria
-  void dispose();
+  // al instanciar cualquier clase hija, se activa la escucha del ciclo de vida
+  accionesBase() {
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  // método para limpiar recursos
+  @mustCallSuper
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  // método que detecta si la app se pausa (paused) o se resume (resumed)
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    // si el ciclo de vida está pausado, quitamos el teclado automáticamente al minimizar
+    if (state == AppLifecycleState.paused) {
+      FocusManager.instance.primaryFocus?.unfocus();
+    }
+  }
 
   // utilidad para mostrar alertas
   // si [esError] es true, el fondo será rojo
