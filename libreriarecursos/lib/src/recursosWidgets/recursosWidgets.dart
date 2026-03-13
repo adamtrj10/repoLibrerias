@@ -149,21 +149,26 @@ class recursosWidgets {
   static Widget visorWeb(
       {required String url,
       void Function(int)? alProgresar,
-      void Function(int)? alTerminar}) {
+      void Function(String)? alTerminar}) {
     final String urlLimpia = url.trim();
 
-    final controller = WebViewController()
+    final controladorWeb = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onWebResourceError: (error) {
-            print("Error cargando la web: ${error.description}");
-          },
-        ),
+            onProgress: alProgresar,
+            onPageFinished: alTerminar,
+            onWebResourceError: (error) {},
+            onNavigationRequest: (NavigationRequest request) {
+              if (request.url.startsWith('https://')) {
+                return NavigationDecision.navigate;
+              }
+              return NavigationDecision.prevent;
+            }),
       )
       ..loadRequest(Uri.parse(urlLimpia));
 
-    return WebViewWidget(controller: controller);
+    return WebViewWidget(controller: controladorWeb);
   }
 }
 
