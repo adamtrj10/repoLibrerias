@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 abstract class accionesBase with WidgetsBindingObserver {
+  // variable genérica que nos permite navegar entre pantallas
+  bool puedoNavegar = true;
   // llave única para gestionar y validar formularios de forma centralizada
   final GlobalKey<FormState> llaveForm = GlobalKey<FormState>();
 
