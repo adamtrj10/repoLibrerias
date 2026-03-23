@@ -19,9 +19,13 @@ abstract class accionesBase with WidgetsBindingObserver {
   accionesBase() {
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      onCompletamenteConstruido();
       estadoIniciado();
     });
   }
+
+  @mustCallSuper
+  void onCompletamenteConstruido() {}
 
   @mustCallSuper
   void estadoIniciado() {}
