@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class Notificador<T> extends ChangeNotifier implements ValueListenable<T> {
   T _value;

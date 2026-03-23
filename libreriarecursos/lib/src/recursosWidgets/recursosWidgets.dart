@@ -150,8 +150,10 @@ class recursosWidgets {
       {required String url,
       void Function(int)? alProgresar,
       void Function(String)? alTerminar}) {
+    // eliminamos espacios en blanco de la URL
     final String urlLimpia = url.trim();
 
+    // configuramos el controlador web
     final controladorWeb = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
@@ -159,6 +161,8 @@ class recursosWidgets {
             onProgress: alProgresar,
             onPageFinished: alTerminar,
             onWebResourceError: (error) {},
+            // controlamos qué enlaces podemos abrir, en este caso solamente
+            // si la URL es https
             onNavigationRequest: (NavigationRequest request) {
               if (request.url.startsWith('https://')) {
                 return NavigationDecision.navigate;
@@ -166,6 +170,7 @@ class recursosWidgets {
               return NavigationDecision.prevent;
             }),
       )
+      // lanzamos la petición de carga de la URL
       ..loadRequest(Uri.parse(urlLimpia));
 
     return WebViewWidget(controller: controladorWeb);
