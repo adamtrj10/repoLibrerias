@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 abstract class accionesBase with WidgetsBindingObserver {
   void procesosInitState();
 
-  @override
-  void initState() {
-    procesosInitState();
-  }
-
   /// variable genérica que nos permite navegar entre pantallas
   bool puedoNavegar = true;
 
