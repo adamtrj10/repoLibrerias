@@ -62,6 +62,32 @@ class recursosWidgets {
     );
   }
 
+  // widget botón transparente
+
+  // widget de botón base actualizado para permitir transparencias
+  static Widget botonTransparente({
+    required Widget contenido,
+    required double ancho,
+    required double alto,
+    required Color colorfondo,
+    required VoidCallback accion,
+  }) {
+    return Material(
+      color: colorfondo, // Aquí sí funcionará el Colors.transparent
+      borderRadius: BorderRadius.circular(8),
+      child: InkWell(
+        onTap: accion,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          width: ancho,
+          height: alto,
+          alignment: Alignment.center,
+          child: contenido,
+        ),
+      ),
+    );
+  }
+
 // widget básico de texto
   static Widget texto({
     required String text,
