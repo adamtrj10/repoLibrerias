@@ -1,4 +1,260 @@
-include: package:flutter_lints/flutter.yaml
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+linter:
+  rules:
+    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    # Archivo de reglas de código, para mas info sobre alguna regla visitar:
+    # https://dart.dev/tools/linter-rules
+    # 
+    # Última revisión de reglas: 2024-03-05
+    # Versión Flutter: 3.13.9
+    #
+    # Añadir las reglas en orden alfabético para un mayor orden
+    # * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    # ---------------------------------------------------------------------------------------
+    # -- 
+    #   Reglas a las que no hay que hacerles caso siempre, se mantienen comentadas, pero 
+    #   sirven de vez en cuando para descomentar y revisar si algo se puede mejorar
+    # --
+    # Para especificar siempre el tipo de dato de la variable declarada
+    # Por defecto esta desactivada esta regla ya que muestra demasiados avisos innecesarios,
+    # pero nos viene bien si queremos revisar el formato de una pagina o funcionalidad nueva,
+    # ya que en algunas cosas si que nos ayuda.
+    # Ultima revisión: 2024-05-29 David Bou
+    #- always_specify_types
+    # Para evitar declarar las variables constantes empezando por mayúsculas
+    #- constant_identifier_names
+    # Para eliminar las lambdas innecesarias
+    # Mucho cuidado si se utiliza, no hay que eliminar expresiones que nos ayudan a entender
+    # mejor la funcionalidad
+    #- unnecessary_lambdas
+    # Para evitar acceder a propiedades de un objeto dinámico
+    #- avoid_dynamic_calls
+    # Para evitar indicar un valor de un parámetro igual al que tiene por defecto
+    #- avoid_redundant_argument_values
+    # Para evitar hacer una asignación previa al return de lo que se va a retornar
+    # En ocasiones conviene mantenerlo para que el código sea mas entendible
+    #- join_return_with_assignment
+    # Para utilizar "" en vez de ''
+    # Comentado porque detecta todos los imports y esos los dejamos como ''
+    #- prefer_double_quotes
+    # ---------------------------------------------------------------------------------------
+    # Para declarar siempre el retorno de las funciones
+    - always_declare_return_types
+    # Para colocar el cuerpo de las estructuras de control (if, for, while, etc.) 
+    # en una nueva línea en lugar de en la misma línea que la declaración
+    - always_put_control_body_on_new_line
+    # Para posicionar los parámetros opcionales con "required." en por delante de los
+    # opcionales
+    - always_put_required_named_parameters_first
+    # Para declarar siempre las funciones sobrescritas con @override
+    - annotate_overrides
+    # Para evitar el uso de los "print"
+    - avoid_print
+    # Para evitar inicializar variables a null
+    - avoid_init_to_null
+    # Para evitar retornar "null" en funciones "void"
+    - avoid_returning_null_for_void
+    # Para evitar el uso de "toString()"s innecesarios
+    - avoid_type_to_string
+    # Para evitar declarar "Container"s innecesarios
+    - avoid_unnecessary_containers
+    # Para evitar declarar parámetros en los constructores que no se utilizan
+    - avoid_unused_constructor_parameters
+    # Para evitar declarar nombres de parámetros como tipos de dato, es decir:
+    # void funcion(int){}
+    - avoid_types_as_parameter_names
+    # Para evitar declarar parámetros de función como "final"
+    - avoid_final_parameters
+    # Para dejar todas estructuras iguales, utilizar "for x in lista" en 
+    # vez de "lista.forEach((x){})";
+    - avoid_function_literals_in_foreach_calls
+    # Para evitar declarar variables del mismo tipo en línea
+    - avoid_multiple_declarations_per_line
+    # Al sobrescribir el operador de igualdad, evitar comparar si viene a null ya que no es posible
+    # @override
+    # bool operator
+    - avoid_null_checks_in_equality_operators
+    # Para evitar cambiar el nombre de un parámetro al sobrescribir una función 
+    - avoid_renaming_method_parameters
+    # Para evitar declarar el tipo de dato de retorno en los "set" ya que es innecesario
+    - avoid_return_types_on_setters
+    # Si establecemos un "setter" también declararemos el "getter" y viceversa
+    #- avoid_setters_without_getters # Cancelada
+    # Para evitar las declaraciones innecesarias con "..", 
+    # por ejemplo: "variable..funcion" > "variable.funcion"
+    - avoid_single_cascade_in_expression_statements
+    # Para evitar utilizar "await" en algo que no sea "Future"
+    - await_only_futures
+    # Para declarar el nombre de las extensiones siempre con "UpperCamelCase"
+    - camel_case_extensions
+    # Para declarar el nombre de los tipos siempre con "UpperCamelCase"
+    - camel_case_types
+    # Si creamos una instancia de "StreamSubscription" nos recuerda el tener que finalizar
+    # la escucha con el método ".cancel()"
+    - cancel_subscriptions
+    # Para evitar convertir una variable "nullable" en una "no nullable" 
+    - cast_nullable_to_non_nullable
+    # Si creamos una instancia de "IOSink" nos recuerda el tener que cerrar el canal al finalizar
+    # el uso con el método ".close()"
+    - close_sinks
+    # Para evitar usos erróneos de un tipo de dato, por ejemplo:
+    # - mal:
+    # List<int> listaInt = [];
+    # bool existe = listaInt.contains("1");
+    - collection_methods_unrelated_type
+    # Para declarar todas las estructuras con "{}", detecta más que "always_put_control_body_on_new_line"
+    - curly_braces_in_flow_control_structures
+    # Para indicar que páginas tienen los imports desordenados, basta con
+    # pulsar "Alt + Shift + o" para ordenar la página o hacer "F1 > organize imports"
+    - directives_ordering
+    # Para no dejar los "catch" de los "try" vacíos
+    - empty_catches
+    # Para evitar dejar el cuerpo de los constructores vacío "{}"
+    - empty_constructor_bodies
+    # Para evitar declaraciones vacías
+    - empty_statements
+    # Si hacemos un Switch-Case sobre un tipo de dato definido tenemos que declarar todas las 
+    # posibilidades o por lo menos un "default"
+    - exhaustive_cases
+    # Para declarar los nombre de archivos con minúsculas y separados con "_":
+    # - mal: nombreArchivo.dart
+    # - bien: nombre_archivo.dart
+    - file_names
+    # Cuando una variable escrita entre [] pierde la referencia nos avisa 
+    - comment_references
+    # Si sobrescribimos el operador de igualdad:
+    # @override
+    # bool operator ==(Object other) {
+    # Debemos de implementar también:
+    # @override
+    # int get hashCode => 
+    - hash_and_equals
+    # Para nombrar el nombre de las librerías con minúscula y guion bajo
+    - library_names
+    # Para nombrar los alias de las librerías con minúsculas
+    - library_prefixes
+    # Para evitar expresiones constantes en condicionales (if)
+    - literal_only_boolean_expressions
+    # Para evitar valores repetidos en el "case" del "switch"
+    - no_duplicate_case_values
+    # Para evitar declarar variables o funciones que empiezan por "_" en ámbitos privados como funciones
+    - no_leading_underscores_for_local_identifiers
+    # Para evitar errores en la creación de listas de List<String>
+    - no_adjacent_strings_in_list
+    # Para evitar acción innecesaria de igualar una variable a si misma
+    - no_self_assignments
+    # Para evitar declarar los alias de las librerías con "_" al principio
+    - no_leading_underscores_for_library_prefixes
+    # Para declarar el nombre de las variables que no sean constantes con el formato
+    # correcto, al estilo de "nombreVariable"
+    - non_constant_identifier_names
+    # Evitar declaraciones innecesarias como "variableString.toString()"
+    - noop_primitive_operations
+    # Para que los "throw" siempre devuelvan un error y no un String
+    - only_throw_errors
+    # Cuando sea posible utilizar "??=" para evitar "if (x == null) {x = y}"
+    - prefer_conditional_assignment
+    # Para declarar constructores constantes 
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    # Para declarar las variables como "const", tiene mas prioridad que "prefer_final_locals"
+    - prefer_const_declarations
+    # Mejor utilizar "contains" en vez de "indexOf == -1" en condicionales de listas
+    - prefer_contains
+    # Para declarar variables como "final"
+    - prefer_final_locals
+    # Para declarar los "fields" como "final", actúa por separado de "prefer_final_locals"
+    - prefer_final_fields
+    # Para evitar "v = a == null ? b : a;" y usar "v = a ?? b;"
+    - prefer_if_null_operators
+    # Para evitar declaraciones innecesarias en constructores de clases
+    - prefer_initializing_formals
+    # Para usar ".isEmpty" o ".isNotEmpty" en vez de "> 0" o "== 0", etc.
+    - prefer_is_empty
+    # Para usar ".isNotEmpty" en vez de "!.isEmpty"
+    - prefer_is_not_empty
+    # Para sustituir los tipos "Null" por "void"
+    - prefer_void_to_null
+    # Para recorrer los mapas con "for" en vez de "fromIterable"
+    - prefer_for_elements_to_map_fromIterable
+    # Para declarar las funciones de manera correcta y no como una igualación
+    - prefer_function_declarations_over_variables
+    # Para inicializar las listas de manera correcta y no con ".add()"
+    - prefer_inlined_adds
+    # Para utilizar "iterable.whereType<T>()" en vez de "iterable.where((e) => e is T)"
+    - prefer_iterable_whereType
+    # Para evitar los "getters" recursivos
+    - recursive_getters
+    # En las declaraciones que utilicen mas de una línea añadir una "," al
+    # final para que al formatear el archivo quede más legible
+    - require_trailing_commas
+    # Para reemplazar los "Container" por "SizedBox" porque son más óptimos cuando
+    # se pueda
+    - sized_box_for_whitespace
+    # Utilizar "///" en vez de "/**" para comentar funciones
+    - slash_for_doc_comments
+    # Cuando se crea un Widget se prioriza declarar los atributos primero y luego 
+    # el "child" o "children"
+    - sort_child_properties_last
+    # Para declarar el constructor antes que lo demás
+    - sort_constructors_first
+    # Para declarar los constructores vacíos por encima de los otros
+    - sort_unnamed_constructors_first
+    # Para declarar siempre el tipo de dato en las funciones
+    - type_annotate_public_apis
+    # Para evitar declarar el tipo de dato en parámetros al declarar un constructor
+    - type_init_formals
+    # Para evitar retornar un valor con "await" en una función que retorna "Future"
+    - unnecessary_await_in_return
+    # Quitar los "{}" innecesarios en las variables dentro de los Strings:
+    - unnecessary_brace_in_string_interps
+    # Si la variable es constante no hace falta hacer constante el valor
+    # - mal: const SizedBox caja = const SizedBox(width: 5);
+    # - bien: const SizedBox caja = SizedBox(width: 5);
+    - unnecessary_const
+    # Para evitar declarar ".new" al inicializar una variable sobre un constructor
+    - unnecessary_constructor_name
+    # Para eliminar las definiciones "late" innecesarias
+    - unnecessary_late
+    # Para evitar declaraciones innecesarias de codigo entre paréntesis "()"
+    - unnecessary_parenthesis
+    # Eliminar declaraciones innecesarias de Strings con "$"
+    # - mal: String s = '$variable';
+    # - bien: String s = "variable";
+    - unnecessary_string_interpolations
+    # Para eliminar declaraciones que no sirven para nada
+    - unnecessary_statements
+    # Para evitar la declaración innecesaria de "new"
+    - unnecessary_new
+    # Para evitar utilizar "?" en ocasiones innecesarias
+    - unnecessary_null_aware_operator_on_extension_on_nullable
+    # Para evitar declarar variables nullables "?" cuando se le esta asignando
+    # un valor "not null"
+    - unnecessary_nullable_for_final_variable_declarations
+    # Para eliminar las asignaciones "null" innecesarias
+    - unnecessary_null_aware_assignments
+    # Para eliminar los null check (!) innecesarios
+    - unnecessary_null_checks
+    # Para evitar utilizar "null" como operando en operadores "if null".
+    - unnecessary_null_in_if_null_operators
+    # Para no sobrescribir una función con @override si no se va a modificar su comportamiento
+    - unnecessary_overrides
+    # Para eliminar las "\" innecesarias dentro de los Strings
+    - unnecessary_string_escapes
+    # Para eliminar los ".toList()" innecesarios
+    - unnecessary_to_list_in_spreads
+    # Para utilizar "ColoredBox" en vez de "Container" cuando solo se montan
+    # las etiquetas "color" y "child"
+    - use_colored_box    
+    # Para utilizar "DecoratedBox" en vez de "Container" cuando solo se montan
+    # las etiquetas "decoration" y "child"
+    - use_decorated_box
+    # Añadir el parámetro "Key? key" a los constructores de los Widgets
+    # que extienden a "extends StatelessWidget"
+    - use_key_in_widget_constructors
+    # Para utilizar de mejor manera el "part of"
+    - use_string_in_part_of_directives
+    # Para validar las expresiones regulares
+    - valid_regexps
+    # Para evitar declarar función con retorno "void" cuando se esta haciendo internamente
+    # un "return" con un valor
+    - void_checks

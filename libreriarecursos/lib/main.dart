@@ -10,13 +10,13 @@ class PruebaRapida extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: recursosWidgets.botonTexto(
+        child: Recursos_widgets.botonTexto(
           texto: "PROBAR BOTÓN",
           ancho: 200,
           alto: 60,
           colortexto: Colors.white,
           colorfondo: Colors.blue,
-          accion: () => print("¡El botón de la librería funciona!"),
+          accion: () => debugPrint(""),
         ),
       ),
     );

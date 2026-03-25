@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-abstract class accionesBase with WidgetsBindingObserver {
+abstract class Accionesbase with WidgetsBindingObserver {
+  /// al instanciar cualquier clase hija, se activa la escucha del ciclo de vida
+  Accionesbase() {
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onCompletamenteConstruido();
+      estadoIniciado();
+    });
+  }
   void procesosInitState();
 
   /// variable genérica que nos permite navegar entre pantallas
@@ -9,15 +17,6 @@ abstract class accionesBase with WidgetsBindingObserver {
 
   /// llave única para gestionar y validar formularios de forma centralizada
   final GlobalKey<FormState> llaveForm = GlobalKey<FormState>();
-
-  /// al instanciar cualquier clase hija, se activa la escucha del ciclo de vida
-  accionesBase() {
-    WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      onCompletamenteConstruido();
-      estadoIniciado();
-    });
-  }
 
   @mustCallSuper
   void onCompletamenteConstruido() {}
@@ -60,16 +59,22 @@ abstract class accionesBase with WidgetsBindingObserver {
   /// utilidad para mostrar alertas
   /// si [esError] es true, el fondo será rojo
   /// sino, será verde
-  void mostrarMensaje(BuildContext context, String mensaje,
-      {bool esError = false}) {
+  void mostrarMensaje(
+    BuildContext context,
+    String mensaje, {
+    bool esError = false,
+  }) {
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(mensaje),
         backgroundColor: esError ? Colors.red : Colors.green,
-        duration: const Duration(seconds: 2)));
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 
   void prueba() {
-    print("prueba_accionesBase");
+    debugPrint("");
   }
 }

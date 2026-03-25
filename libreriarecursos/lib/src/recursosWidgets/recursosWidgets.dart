@@ -1,11 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:libreriarecursos/libreriarecursos.dart';
-import 'package:camera/camera.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: camel_case_types
-class recursosWidgets {
+class Recursos_widgets {
 // widget de botón con icono
   static Widget botonIcono({
     required IconData icono,
@@ -39,7 +39,7 @@ class recursosWidgets {
       colorfondo: colorfondo,
       accion: accion,
       contenido: Text(texto,
-          style: TextStyle(color: colortexto, fontWeight: FontWeight.bold)),
+          style: TextStyle(color: colortexto, fontWeight: FontWeight.bold),),
     );
   }
 
@@ -153,7 +153,9 @@ class recursosWidgets {
         detectionSpeed: DetectionSpeed.noDuplicates,
       ),
       onDetect: (capture) {
-        if (detectado) return; // si ya lo detectó, no hace nada más
+        if (detectado) {
+          return; // si ya lo detectó, no hace nada más
+        }
 
         final List<Barcode> barcodes = capture.barcodes;
         if (barcodes.isNotEmpty) {
@@ -171,7 +173,7 @@ class recursosWidgets {
   static Widget visorWeb(
       {required String url,
       void Function(int)? alProgresar,
-      void Function(String)? alTerminar}) {
+      void Function(String)? alTerminar,}) {
     // eliminamos espacios en blanco de la URL
     final String urlLimpia = url.trim();
 
@@ -190,7 +192,7 @@ class recursosWidgets {
                 return NavigationDecision.navigate;
               }
               return NavigationDecision.prevent;
-            }),
+            },),
       )
       // lanzamos la petición de carga de la URL
       ..loadRequest(Uri.parse(urlLimpia));

@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 /// **Parámetros:** recibe un valor inicial genérico [T]
 /// **Devuelve** una instancia [Notificador] que notifica a sus oyentes
 class Notificador<T> extends ChangeNotifier implements ValueListenable<T> {
-  T _value;
   Notificador(this._value);
+  T _value;
 
   /// Actualiza el valor interno y dispara la notificación a todos los widgets que escuchan
   /// [nuevoValor] -> el nuevo dato que queremos almacenar
